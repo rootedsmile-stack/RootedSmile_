@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+  title?: string;
+  icon?: string;
+}
+
+const { class: className = '', title, icon } = Astro.props;
+---
+
+<div class={`bg-white rounded-2xl p-8 shadow-sm border border-warm-beige hover:shadow-md transition ${className}`}>
+  {icon && (
+    <div class="text-4xl mb-4">{icon}</div>
+  )}
+  {title && (
+    <h3 class="font-serif text-xl font-semibold mb-3 text-primary-teal">{title}</h3>
+  )}
+  <div class="text-charcoal/80">
+    <slot />
+  </div>
+</div>
