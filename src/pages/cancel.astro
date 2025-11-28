@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="Checkout Canceled">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="mb-8">
+        <div class="w-20 h-20 bg-warm-beige rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-10 h-10 text-primary-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </div>
+        <h1 class="font-serif text-5xl font-bold mb-4">Checkout Canceled</h1>
+        <p class="text-xl text-charcoal/70 mb-8">
+          Your order was not completed. Your cart items are still saved.
+        </p>
+      </div>
+
+      <div class="bg-warm-beige rounded-2xl p-8 mb-8">
+        <p class="text-charcoal/80 mb-4">
+          No charges were made to your account. Feel free to continue shopping or try checking out again when you're ready.
+        </p>
+        <p class="text-sm text-charcoal/60">
+          Need help? We're here to assist you with any questions.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/shop" variant="primary">Return to Shop</Button>
+        <Button href="/contact" variant="outline">Contact Support</Button>
+      </div>
+    </div>
+  </SectionWrapper>
+</Layout>
