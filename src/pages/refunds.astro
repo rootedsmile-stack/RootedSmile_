@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+---
+
+<Layout title="Refund Policy">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="font-serif text-5xl font-bold mb-8">Refund Policy</h1>
+      <p class="text-charcoal/70 mb-8">Last updated: {new Date().toLocaleDateString()}</p>
+
+      <div class="bg-white rounded-2xl p-8 md:p-12 border border-warm-beige space-y-6 text-charcoal/80">
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">30-Day Satisfaction Guarantee</h2>
+          <p>
+            We stand behind our product. If you're not completely satisfied with your Rooted Smile Tooth Powder, you may return it within 30 days of purchase for a full refund.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Return Process</h2>
+          <p>
+            To initiate a return, please contact us through our contact page with your order number and reason for return. We'll provide you with return instructions.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Refund Timeline</h2>
+          <p>
+            Once we receive your returned product, we'll process your refund within 5-7 business days. Refunds will be issued to the original payment method.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Shipping Costs</h2>
+          <p>
+            Original shipping costs are non-refundable. Return shipping costs are the responsibility of the customer unless the return is due to our error.
+          </p>
+        </section>
+      </div>
+    </div>
+  </SectionWrapper>
+</Layout>
