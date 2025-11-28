@@ -1,0 +1,236 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import FAQAccordion from '../components/FAQAccordion';
+import CheckoutModal from '../components/CheckoutModal';
+
+const faqItems = [
+  {
+    question: "Is Rooted Smile Tooth Powder safe for sensitive teeth?",
+    answer: "Yes. Our formula uses ultra-fine mineral clays and soothing Ayurvedic herbs that polish without abrasion."
+  },
+  {
+    question: "Does it contain fluoride or foaming agents?",
+    answer: "No. The blend is completely free of fluoride, SLS, parabens, glycerin, artificial whiteners, and synthetic flavors."
+  },
+  {
+    question: "Can kids use it?",
+    answer: "Yes, but supervise younger children so they do not swallow excess powder. Ingredients are clean and food-based."
+  },
+  {
+    question: "Will it whiten my teeth?",
+    answer: "Most users notice a natural brightening effect within 1–3 weeks due to gentle polishing and reduced staining."
+  },
+  {
+    question: "Can I use it with regular toothpaste?",
+    answer: "Yes. You can alternate between the two or use the powder as your primary cleanser."
+  },
+  {
+    question: "How long does one jar last?",
+    answer: "A 50g jar lasts approximately 4–6 weeks with twice-daily use."
+  },
+  {
+    question: "What makes Rooted Smile different from other natural tooth powders?",
+    answer: "Our formula blends Ayurvedic herbs with premium cosmetic-grade mineral clays, using a clean-luxury approach to ingredient sourcing and processing."
+  },
+  {
+    question: "Does it taste herbal or spicy?",
+    answer: "It has a mild, clean herbal flavor—intentionally subtle and not overpowering."
+  },
+  {
+    question: "Will the powder damage my enamel?",
+    answer: "No. It is formulated to be extremely fine and enamel-safe. We do not use coarse abrasive powders."
+  },
+  {
+    question: "Is your packaging eco-friendly?",
+    answer: "Yes. Jars and tins are recyclable or reusable, and we avoid unnecessary plastics."
+  }
+];
+---
+
+<Layout title="Shop">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="grid lg:grid-cols-2 gap-16">
+      <!-- Product Image -->
+      <div class="space-y-4">
+        <div class="aspect-square bg-warm-beige rounded-3xl overflow-hidden shadow-xl flex items-center justify-center">
+          <p class="text-charcoal/30 font-serif text-2xl">Product Image</p>
+        </div>
+      </div>
+
+      <!-- Product Details -->
+      <div>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">
+          Rooted Smile Tooth Powder
+        </h1>
+        <p class="text-xl text-charcoal/70 mb-8">
+          Clean heritage tooth powder crafted with Ayurvedic wisdom and modern care.
+        </p>
+
+        <!-- Size Selector -->
+        <div class="mb-6">
+          <label class="block text-sm font-semibold mb-3 text-primary-teal">Select Size</label>
+          <div class="grid grid-cols-3 gap-3">
+            <button class="size-option border-2 border-warm-beige hover:border-primary-teal bg-white rounded-xl p-4 text-center transition" data-size="25g" data-price="18">
+              <p class="font-semibold text-primary-teal">25g</p>
+              <p class="text-sm text-charcoal/60">$18</p>
+            </button>
+            <button class="size-option border-2 border-primary-teal bg-warm-beige/30 rounded-xl p-4 text-center transition active" data-size="50g" data-price="32">
+              <p class="font-semibold text-primary-teal">50g</p>
+              <p class="text-sm text-charcoal/60">$32</p>
+            </button>
+            <button class="size-option border-2 border-warm-beige hover:border-primary-teal bg-white rounded-xl p-4 text-center transition" data-size="100g" data-price="58">
+              <p class="font-semibold text-primary-teal">100g</p>
+              <p class="text-sm text-charcoal/60">$58</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quantity Selector -->
+        <div class="mb-8">
+          <label class="block text-sm font-semibold mb-3 text-primary-teal">Quantity</label>
+          <div class="flex items-center space-x-4">
+            <button id="decrease-qty" class="w-10 h-10 rounded-full border-2 border-primary-teal text-primary-teal hover:bg-primary-teal hover:text-white transition">
+              −
+            </button>
+            <span id="quantity-display" class="text-2xl font-semibold w-8 text-center">1</span>
+            <button id="increase-qty" class="w-10 h-10 rounded-full border-2 border-primary-teal text-primary-teal hover:bg-primary-teal hover:text-white transition">
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Price Display -->
+        <div class="mb-8">
+          <p class="text-3xl font-serif font-bold text-primary-teal">
+            $<span id="total-price">32</span>
+          </p>
+        </div>
+
+        <!-- Checkout Button -->
+        <button id="checkout-btn" class="w-full bg-primary-teal text-soft-white px-8 py-4 rounded-full font-semibold hover:bg-primary-teal/90 transition mb-4">
+          Proceed to Checkout
+        </button>
+        <p class="text-xs text-center text-charcoal/60">Secure payment processing with Stripe</p>
+      </div>
+    </div>
+
+    <!-- Ingredients Section -->
+    <div class="mt-24">
+      <h2 class="font-serif text-3xl font-bold mb-8 text-center">Clean Ingredients</h2>
+      <div class="bg-white rounded-2xl p-8 border border-warm-beige">
+        <ul class="grid md:grid-cols-2 gap-4 text-charcoal/80">
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Neem Powder:</strong> Natural antibacterial properties</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Bentonite Clay:</strong> Gentle polishing and detoxifying</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Clove Powder:</strong> Soothing and aromatic</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Mint Leaf:</strong> Fresh, clean flavor</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Turmeric:</strong> Anti-inflammatory support</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Activated Charcoal:</strong> Natural whitening</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Sea Salt:</strong> Mineral-rich cleansing</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-terracotta mr-2">•</span>
+            <span><strong>Cardamom:</strong> Aromatic freshness</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-24">
+      <h2 class="font-serif text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <FAQAccordion items={faqItems} client:load />
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Checkout Modal -->
+  <CheckoutModal client:only="react" />
+</Layout>
+
+<script>
+  import { addToCart } from '../components/cart/CartContext';
+
+  let selectedSize = '50g';
+  let selectedPrice = 32;
+  let quantity = 1;
+
+  const sizeButtons = document.querySelectorAll('.size-option');
+  const decreaseBtn = document.getElementById('decrease-qty');
+  const increaseBtn = document.getElementById('increase-qty');
+  const quantityDisplay = document.getElementById('quantity-display');
+  const totalPriceDisplay = document.getElementById('total-price');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  function updatePrice() {
+    const total = selectedPrice * quantity;
+    if (totalPriceDisplay) {
+      totalPriceDisplay.textContent = total.toString();
+    }
+  }
+
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sizeButtons.forEach(b => {
+        b.classList.remove('active', 'border-primary-teal', 'bg-warm-beige/30');
+        b.classList.add('border-warm-beige', 'bg-white');
+      });
+      btn.classList.add('active', 'border-primary-teal', 'bg-warm-beige/30');
+      btn.classList.remove('border-warm-beige', 'bg-white');
+      
+      selectedSize = btn.dataset.size || '50g';
+      selectedPrice = parseInt(btn.dataset.price || '32');
+      updatePrice();
+    });
+  });
+
+  decreaseBtn?.addEventListener('click', () => {
+    if (quantity > 1) {
+      quantity--;
+      if (quantityDisplay) quantityDisplay.textContent = quantity.toString();
+      updatePrice();
+    }
+  });
+
+  increaseBtn?.addEventListener('click', () => {
+    if (quantity < 10) {
+      quantity++;
+      if (quantityDisplay) quantityDisplay.textContent = quantity.toString();
+      updatePrice();
+    }
+  });
+
+  checkoutBtn?.addEventListener('click', () => {
+    const items = [{
+      name: `Rooted Smile Tooth Powder (${selectedSize})`,
+      price: selectedPrice,
+      quantity: quantity,
+      size: selectedSize
+    }];
+
+    window.dispatchEvent(new CustomEvent('openCheckout', { 
+      detail: { items, total: selectedPrice * quantity }
+    }));
+  });
+</script>
