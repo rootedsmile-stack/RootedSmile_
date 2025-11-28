@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="Order Confirmed">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="mb-8">
+        <div class="w-20 h-20 bg-primary-teal rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-10 h-10 text-soft-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h1 class="font-serif text-5xl font-bold mb-4">Order Confirmed!</h1>
+        <p class="text-xl text-charcoal/70 mb-8">
+          Thank you for choosing Rooted Smile. Your order has been received and is being prepared.
+        </p>
+      </div>
+
+      <div class="bg-warm-beige rounded-2xl p-8 mb-8">
+        <h2 class="font-serif text-2xl font-bold mb-4 text-primary-teal">What's Next?</h2>
+        <div class="space-y-4 text-left">
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">📧</span>
+            <div>
+              <p class="font-semibold text-primary-teal">Order Confirmation</p>
+              <p class="text-sm text-charcoal/70">You'll receive an email confirmation shortly with your order details.</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">📦</span>
+            <div>
+              <p class="font-semibold text-primary-teal">Shipping Updates</p>
+              <p class="text-sm text-charcoal/70">We'll email you when your order ships with tracking information.</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">😊</span>
+            <div>
+              <p class="font-semibold text-primary-teal">Enjoy Your Smile</p>
+              <p class="text-sm text-charcoal/70">Your Rooted Smile Tooth Powder should arrive within 5-7 business days.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <Button href="/" variant="primary">Return to Home</Button>
+        <p class="text-sm text-charcoal/60">
+          Questions about your order? <a href="/contact" class="text-primary-teal hover:underline">Contact us</a>
+        </p>
+      </div>
+    </div>
+  </SectionWrapper>
+</Layout>
+
+<script>
+  import { clearCart } from '../components/cart/CartContext';
+  clearCart();
+</script>
