@@ -34,4 +34,113 @@ import Button from '../components/Button.astro';
     <div class="text-center mb-16">
       <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Why Rooted Smile</h2>
       <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">
-        Clean​​​​​​​​​​​​​​​​
+        Clean luxury meets time-tested tradition in every jar.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <Card title="Ayurvedic Roots" icon="🌿">
+        <p class="text-sm">Time-tested herbs blended for balanced oral health.</p>
+      </Card>
+      <Card title="Clean Ingredients" icon="✨">
+        <p class="text-sm">No fluoride, no SLS, no artificial whiteners. Only plant-based powders.</p>
+      </Card>
+      <Card title="Enamel-Safe Polish" icon="💎">
+        <p class="text-sm">Ultra-fine mineral clays that clean without abrasion.</p>
+      </Card>
+      <Card title="Handcrafted" icon="🤲">
+        <p class="text-sm">Made in small batches with intention, integrity, and quality control.</p>
+      </Card>
+    </div>
+  </SectionWrapper>
+
+  <!-- How It Works -->
+  <SectionWrapper background="white">
+    <div class="text-center mb-16">
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">How to Use</h2>
+      <p class="text-lg text-charcoal/70">Simple, intentional, effective.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-12 max-w-4xl mx-auto">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-teal text-soft-white rounded-full flex items-center justify-center text-2xl font-serif font-bold mx-auto mb-6">
+          1
+        </div>
+        <h3 class="font-serif text-xl font-semibold mb-3">Wet Brush</h3>
+        <p class="text-charcoal/70">Wet your toothbrush lightly with water.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-teal text-soft-white rounded-full flex items-center justify-center text-2xl font-serif font-bold mx-auto mb-6">
+          2
+        </div>
+        <h3 class="font-serif text-xl font-semibold mb-3">Dip Gently</h3>
+        <p class="text-charcoal/70">Dip gently into the powder.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-teal text-soft-white rounded-full flex items-center justify-center text-2xl font-serif font-bold mx-auto mb-6">
+          3
+        </div>
+        <h3 class="font-serif text-xl font-semibold mb-3">Brush & Smile</h3>
+        <p class="text-charcoal/70">Brush for 1–2 minutes, rinse, smile.</p>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Ingredients Highlight -->
+  <SectionWrapper background="beige">
+    <div class="text-center mb-16">
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Pure Ingredients</h2>
+      <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">
+        Every ingredient serves a purpose. Nothing artificial, nothing unnecessary.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+      {['Neem', 'Clove', 'Bentonite Clay', 'Mint', 'Turmeric', 'Activated Charcoal', 'Sea Salt', 'Cardamom', 'Cinnamon', 'Myrrh'].map((ingredient) => (
+        <div class="bg-white rounded-xl p-6 text-center shadow-sm border border-warm-beige">
+          <p class="font-medium text-primary-teal">{ingredient}</p>
+        </div>
+      ))}
+    </div>
+  </SectionWrapper>
+
+  <!-- Before You Buy -->
+  <SectionWrapper background="white">
+    <div class="bg-primary-teal text-soft-white rounded-3xl p-12">
+      <div class="text-center mb-12">
+        <h2 class="font-serif text-4xl font-bold mb-4 text-warm-beige">Before You Buy</h2>
+        <p class="text-warm-beige/80 max-w-2xl mx-auto">
+          What makes us different.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-3xl mb-3">✓</div>
+          <p class="text-warm-beige font-medium">No synthetic foaming agents</p>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl mb-3">✓</div>
+          <p class="text-warm-beige font-medium">Safe for sensitive teeth</p>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl mb-3">✓</div>
+          <p class="text-warm-beige font-medium">Eco-friendly packaging</p>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl mb-3">✓</div>
+          <p class="text-warm-beige font-medium">Small-batch quality</p>
+        </div>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- CTA Section -->
+  <SectionWrapper background="beige">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6">
+        Ready for a brighter, calmer smile?
+      </h2>
+      <p class="text-xl text-charcoal/70 mb-8">
+        Join the tradition of Ayurvedic oral care.
+      </p>
+      <Button href="/shop" variant="primary">Shop Now</Button>
+    </div>
+  </SectionWrapper>
+</Layout>
