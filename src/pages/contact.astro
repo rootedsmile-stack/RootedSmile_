@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+---
+
+<Layout title="Contact">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="font-serif text-5xl md:text-6xl font-bold mb-8 text-center">
+        Get in Touch
+      </h1>
+      <p class="text-xl text-center text-charcoal/70 mb-16">
+        We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+      </p>
+
+      <div class="bg-white rounded-2xl p-8 md:p-12 border border-warm-beige">
+        <form id="contact-form" class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-semibold mb-2 text-primary-teal">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full px-4 py-3 border-2 border-warm-beige rounded-xl focus:border-primary-teal focus:outline-none transition"
+              placeholder="Your name"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-semibold mb-2 text-primary-teal">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 border-2 border-warm-beige rounded-xl focus:border-primary-teal focus:outline-none transition"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-semibold mb-2 text-primary-teal">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="6"
+              class="w-full px-4 py-3 border-2 border-warm-beige rounded-xl focus:border-primary-teal focus:outline-none transition resize-none"
+              placeholder="Your message..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-primary-teal text-soft-white px-8 py-4 rounded-full font-medium hover:bg-primary-teal/90 transition"
+          >
+            Send Message
+          </button>
+        </form>
+
+        <div id="success-message" class="hidden mt-6 p-4 bg-primary-teal/10 border border-primary-teal rounded-xl">
+          <p class="text-primary-teal font-medium text-center">Thank you! Your message has been sent.</p>
+        </div>
+
+        <div id="error-message" class="hidden mt-6 p-4 bg-terracotta/10 border border-terracotta rounded-xl">
+          <p class="text-terracotta font-medium text-center">Something went wrong. Please try again.</p>
+        </div>
+      </div>
+    </div>
+  </SectionWrapper>
+</Layout>
+
+<script>
+  import { db } from '../lib/firebase/client';
+  import { collection, addDoc, Timestamp } from 'firebase/firestore';
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const successMessage = document.getElementById('success-message');
+  const errorMessage = document.getElementById('error-message');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+
+    try {
+      await addDoc(collection(db, 'contactMessages'), {
+        name,
+        email,
+        message,
+        createdAt: Timestamp.now()
+      });
+
+      form.reset();
+      successMessage?.classList.remove('hidden');
+      errorMessage?.classList.add('hidden');
+
+      setTimeout(() => {
+        successMessage?.classList.add('hidden');
+      }, 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      errorMessage?.classList.remove('hidden');
+      successMessage?.classList.add('hidden');
+    }
+  });
+</script>
