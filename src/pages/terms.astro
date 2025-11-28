@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+---
+
+<Layout title="Terms of Service">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="font-serif text-5xl font-bold mb-8">Terms of Service</h1>
+      <p class="text-charcoal/70 mb-8">Last updated: {new Date().toLocaleDateString()}</p>
+
+      <div class="bg-white rounded-2xl p-8 md:p-12 border border-warm-beige space-y-6 text-charcoal/80">
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Agreement to Terms</h2>
+          <p>
+            By accessing and using Rooted Smile's website and services, you agree to be bound by these Terms of Service.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Use of Products</h2>
+          <p>
+            Our tooth powder is intended for oral care use only. Discontinue use if irritation occurs. Keep out of reach of young children.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Orders and Payment</h2>
+          <p>
+            All orders are subject to acceptance and availability. Prices are subject to change without notice. Payment is processed securely through Stripe.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Limitation of Liability</h2>
+          <p>
+            Rooted Smile shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products.
+          </p>
+        </section>
+      </div>
+    </div>
+  </SectionWrapper>
+</Layout>
