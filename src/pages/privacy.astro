@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+---
+
+<Layout title="Privacy Policy">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="font-serif text-5xl font-bold mb-8">Privacy Policy</h1>
+      <p class="text-charcoal/70 mb-8">Last updated: {new Date().toLocaleDateString()}</p>
+
+      <div class="bg-white rounded-2xl p-8 md:p-12 border border-warm-beige space-y-6 text-charcoal/80">
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Information We Collect</h2>
+          <p>
+            We collect information you provide directly to us when you make a purchase, create an account, or contact us. This may include your name, email address, shipping address, and payment information.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">How We Use Your Information</h2>
+          <p>
+            We use the information we collect to process your orders, communicate with you about your purchases, and improve our products and services.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Data Security</h2>
+          <p>
+            We implement appropriate technical and organizational measures to protect your personal information. Payment processing is handled securely through Stripe.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-2xl font-bold text-primary-teal mb-4">Contact Us</h2>
+          <p>
+            If you have questions about this Privacy Policy, please contact us through our contact page.
+          </p>
+        </section>
+      </div>
+    </div>
+  </SectionWrapper>
+</Layout>
