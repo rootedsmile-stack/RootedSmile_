@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionWrapper from '../../components/SectionWrapper.astro';
+---
+
+<Layout title="Admin Dashboard">
+  <SectionWrapper class="!pt-24 !pb-32">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <h1 class="font-serif text-4xl font-bold">Admin Dashboard</h1>
+        <button
+          id="logout-btn"
+          class="px-6 py-2 border-2 border-primary-teal text-primary-teal rounded-full hover:bg-primary-teal hover:text-soft-white transition"
+        >
+          Logout
+        </button>
+      </div>
+
+      <div id="auth-check" class="hidden">
+        <div class="bg-warm-beige rounded-2xl p-8 text-center">
+          <p class="text-charcoal/70 mb-4">Please log in to access the admin dashboard.</p>
+          <a href="/admin/login" class="inline-block bg-primary-teal text-soft-white px-8 py-3 rounded-full font-medium hover:bg-primary-teal/90 transition">
+            Go to Login
+          </a>
+        </div>
+      </div>
+
+      <div id="dashboard-content" class="hidden">
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white rounded-2xl p-6 border border-warm-beige">
+            <h3 class="font-serif text-lg font-semibold mb-2 text-primary-teal">Total Orders</h3>
+            <p class="text-3xl font-bold text-charcoal">0</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 border border-warm-beige">
+            <h3 class="font-serif text-lg font-semibold mb-2 text-primary-teal">Contact Messages</h3>
+            <p class="text-3xl font-bold text-charcoal" id="message-count">0</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 border border-warm-beige">
+            <h3 class="font-serif text-lg font-semibold mb-2 text-primary-teal">Revenue</h3>
+            <p class="text-3xl font-bold text-charcoal">$0</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-warm-beige">
+          <h2 class="font-serif text-2xl font-bold mb-6 text-primary-teal">Recent Contact Messages</h2>
+          <div id="messages-list" class="space-y-4">
+            <p class="text-charcoal/60 text-center py-8">Loading messages...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </SectionWrapper>
+</Layout>
+
+<script>
+  import { auth, db } from '../../lib/firebase/client';
+  import { onAuthStateChanged, signOut } from 'firebase/auth';
+  import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+
+  const authCheck = document.getElementById('auth-check');
+  const dashboardContent = document.getElementById('dashboard-content');
+  const logoutBtn = document.getElementById('logout-btn');
+  const messagesList = document.getElementById('messages-list');
+  const messageCount = document.getElementById('message-count');
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      authCheck?.classList.add('hidden');
+      dashboardContent?.classList.remove('hidden');
+      
+      try {
+        const messagesRef = collection(db, 'contactMessages');
+        const q = query(messagesRef, orderBy('createdAt', 'desc'), limit(10));
+        const snapshot = await getDocs(q);
+        
+        if (messageCount) {
+          messageCount.textContent = snapshot.size.toString();
+        }
+        
+        if (messagesList) {
+          if (snapshot.empty) {
+            messagesList.innerHTML = '<p class="text-charcoal/60 text-center py-8">No messages yet.</p>';
+          } else {
+            messagesList.innerHTML = snapshot.docs.map(doc => {
+              const data = doc.data();
+              const date = data.createdAt?.toDate().toLocaleDateString() || 'Unknown';
+              return `
+                <div class="border-b border-warm-beige pb-4">
+                  <div class="flex justify-between items-start mb-2">
+                    <div>
+                      <p class="font-semibold text-primary-teal">${data.name}</p>
+                      <p class="text-sm text-charcoal/60">${data.email}</p>
+                    </div>
+                    <p class="text-xs text-charcoal/50">${date}</p>
+                  </div>
+                  <p class="text-charcoal/80 text-sm">${data.message}</p>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+        if (messagesList) {
+          messagesList.innerHTML = '<p class="text-terracotta text-center py-8">Error loading messages.</p>';
+        }
+      }
+    } else {
+      authCheck?.classList.remove('hidden');
+      dashboardContent?.classList.add('hidden');
+    }
+  });
+
+  logoutBtn?.addEventListener('click', async () => {
+    try {
+      await signOut(auth);
+      window.location.href = '/admin/login';
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  });
+</script>
