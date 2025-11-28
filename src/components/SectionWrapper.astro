@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+  background?: 'white' | 'beige' | 'teal';
+  id?: string;
+}
+
+const { class: className = '', background = 'white', id } = Astro.props;
+
+const bgClasses = {
+  white: 'bg-soft-white',
+  beige: 'bg-warm-beige',
+  teal: 'bg-primary-teal text-soft-white',
+};
+---
+
+<section id={id} class={`section-padding ${bgClasses[background]} ${className}`}>
+  <div class="container-custom">
+    <slot />
+  </div>
+</section>
