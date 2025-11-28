@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionWrapper from '../components/SectionWrapper.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="Home">
+  <!-- Hero Section -->
+  <SectionWrapper class="!pt-24 !pb-32" background="white">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="font-serif text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          Ancient roots, modern purity.
+        </h1>
+        <p class="text-xl text-charcoal/70 mb-8 leading-relaxed">
+          Handcrafted Ayurvedic tooth powder, made in small batches with clean, enamel-safe ingredients.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <Button href="/shop" variant="primary">Shop Tooth Powder</Button>
+          <Button href="#features" variant="outline">Why it works</Button>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-square bg-warm-beige rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
+          <p class="text-charcoal/30 font-serif text-2xl">Product Image</p>
+        </div>
+      </div>
+    </div>
+  </SectionWrapper>
+
+  <!-- Features Section -->
+  <SectionWrapper id="features" background="beige">
+    <div class="text-center mb-16">
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Why Rooted Smile</h2>
+      <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">
+        Clean​​​​​​​​​​​​​​​​
