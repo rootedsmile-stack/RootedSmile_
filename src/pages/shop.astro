@@ -1,12 +1,8 @@
-------
+---
 import Layout from '../layouts/Layout.astro';
 import SectionWrapper from '../components/SectionWrapper.astro';
 import FAQAccordion from '../components/FAQAccordion';
 import CheckoutModalWrapper from '../components/CheckoutModalWrapper';
-
-<!-- Checkout Modal -->
-<CheckoutModalWrapper client:only="react" />
-
 
 const faqItems = [
   {
@@ -55,14 +51,12 @@ const faqItems = [
 <Layout title="Shop">
   <SectionWrapper class="!pt-24 !pb-32">
     <div class="grid lg:grid-cols-2 gap-16">
-      <!-- Product Image -->
       <div class="space-y-4">
         <div class="aspect-square bg-warm-beige rounded-3xl overflow-hidden shadow-xl flex items-center justify-center">
           <p class="text-charcoal/30 font-serif text-2xl">Product Image</p>
         </div>
       </div>
 
-      <!-- Product Details -->
       <div>
         <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">
           Rooted Smile Tooth Powder
@@ -71,7 +65,6 @@ const faqItems = [
           Clean heritage tooth powder crafted with Ayurvedic wisdom and modern care.
         </p>
 
-        <!-- Size Selector -->
         <div class="mb-6">
           <label class="block text-sm font-semibold mb-3 text-primary-teal">Select Size</label>
           <div class="grid grid-cols-3 gap-3">
@@ -90,7 +83,6 @@ const faqItems = [
           </div>
         </div>
 
-        <!-- Quantity Selector -->
         <div class="mb-8">
           <label class="block text-sm font-semibold mb-3 text-primary-teal">Quantity</label>
           <div class="flex items-center space-x-4">
@@ -104,14 +96,12 @@ const faqItems = [
           </div>
         </div>
 
-        <!-- Price Display -->
         <div class="mb-8">
           <p class="text-3xl font-serif font-bold text-primary-teal">
             $<span id="total-price">32</span>
           </p>
         </div>
 
-        <!-- Checkout Button -->
         <button id="checkout-btn" class="w-full bg-primary-teal text-soft-white px-8 py-4 rounded-full font-semibold hover:bg-primary-teal/90 transition mb-4">
           Proceed to Checkout
         </button>
@@ -119,7 +109,6 @@ const faqItems = [
       </div>
     </div>
 
-    <!-- Ingredients Section -->
     <div class="mt-24">
       <h2 class="font-serif text-3xl font-bold mb-8 text-center">Clean Ingredients</h2>
       <div class="bg-white rounded-2xl p-8 border border-warm-beige">
@@ -160,7 +149,6 @@ const faqItems = [
       </div>
     </div>
 
-    <!-- FAQ Section -->
     <div class="mt-24">
       <h2 class="font-serif text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
       <div class="max-w-3xl mx-auto">
@@ -169,8 +157,7 @@ const faqItems = [
     </div>
   </SectionWrapper>
 
-  <!-- Checkout Modal -->
-  <CheckoutModal client:only="react" />
+  <CheckoutModalWrapper client:only="react" />
 </Layout>
 
 <script>
@@ -224,7 +211,7 @@ const faqItems = [
   });
 
   checkoutBtn?.addEventListener('click', () => {
-    console.log('Checkout button clicked!');
+    console.log('🛒 Checkout button clicked!');
     
     const items = [{
       id: 'tooth-powder',
@@ -236,9 +223,8 @@ const faqItems = [
 
     const total = selectedPrice * quantity;
 
-    console.log('Dispatching openCheckout event with:', { items, total });
+    console.log('📦 Dispatching openCheckout event with:', { items, total });
 
-    // Dispatch the event
     window.dispatchEvent(new CustomEvent('openCheckout', { 
       detail: { items, total }
     }));
