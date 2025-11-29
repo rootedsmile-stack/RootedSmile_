@@ -102,9 +102,14 @@ const faqItems = [
           </p>
         </div>
 
-        <button id="checkout-btn" class="w-full bg-primary-teal text-soft-white px-8 py-4 rounded-full font-semibold hover:bg-primary-teal/90 transition mb-4">
-          Proceed to Checkout
+        <button id="add-to-cart-btn" class="w-full bg-primary-teal text-soft-white px-8 py-4 rounded-full font-semibold hover:bg-primary-teal/90 transition mb-4">
+          Add to Cart
         </button>
+        
+        <div id="success-message" class="hidden mb-4 p-4 bg-primary-teal/10 border border-primary-teal rounded-xl text-center">
+          <p class="text-primary-teal font-semibold">✓ Added to cart!</p>
+        </div>
+        
         <p class="text-xs text-center text-charcoal/60">Secure payment processing with Stripe</p>
       </div>
     </div>
@@ -161,6 +166,8 @@ const faqItems = [
 </Layout>
 
 <script>
+  import { addToCart } from '../components/cart/CartContext';
+
   let selectedSize = '50g';
   let selectedPrice = 32;
   let quantity = 1;
@@ -170,7 +177,8 @@ const faqItems = [
   const increaseBtn = document.getElementById('increase-qty');
   const quantityDisplay = document.getElementById('quantity-display');
   const totalPriceDisplay = document.getElementById('total-price');
-  const checkoutBtn = document.getElementById('checkout-btn');
+  const addToCartBtn = document.getElementById('add-to-cart-btn');
+  const successMessage = document.getElementById('success-message');
 
   function updatePrice() {
     const total = selectedPrice * quantity;
@@ -210,23 +218,31 @@ const faqItems = [
     }
   });
 
-  checkoutBtn?.addEventListener('click', () => {
-    console.log('🛒 Checkout button clicked!');
+  addToCartBtn?.addEventListener('click', () => {
+    console.log('🛒 Add to Cart clicked!');
     
-    const items = [{
+    // Add item to cart
+    addToCart({
       id: 'tooth-powder',
-      name: `Rooted Smile Tooth Powder`,
+      name: `Rooted Smile Tooth Powder (${selectedSize})`,
       price: selectedPrice,
       quantity: quantity,
       size: selectedSize
-    }];
+    });
 
-    const total = selectedPrice * quantity;
+    console.log('✅ Item added to cart');
 
-    console.log('📦 Dispatching openCheckout event with:', { items, total });
+    // Show success message
+    if (successMessage) {
+      successMessage.classList.remove('hidden');
+      setTimeout(() => {
+        successMessage.classList.add('hidden');
+      }, 3000);
+    }
 
-    window.dispatchEvent(new CustomEvent('openCheckout', { 
-      detail: { items, total }
-    }));
+    // Reset quantity to 1
+    quantity = 1;
+    if (quantityDisplay) quantityDisplay.textContent = '1';
+    updatePrice();
   });
 </script>
