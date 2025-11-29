@@ -170,8 +170,6 @@ const faqItems = [
 </Layout>
 
 <script>
-  import { addToCart } from '../components/cart/CartContext';
-
   let selectedSize = '50g';
   let selectedPrice = 32;
   let quantity = 1;
@@ -222,15 +220,23 @@ const faqItems = [
   });
 
   checkoutBtn?.addEventListener('click', () => {
+    console.log('Checkout button clicked!');
+    
     const items = [{
-      name: `Rooted Smile Tooth Powder (${selectedSize})`,
+      id: 'tooth-powder',
+      name: `Rooted Smile Tooth Powder`,
       price: selectedPrice,
       quantity: quantity,
       size: selectedSize
     }];
 
+    const total = selectedPrice * quantity;
+
+    console.log('Dispatching openCheckout event with:', { items, total });
+
+    // Dispatch the event
     window.dispatchEvent(new CustomEvent('openCheckout', { 
-      detail: { items, total: selectedPrice * quantity }
+      detail: { items, total }
     }));
   });
 </script>
