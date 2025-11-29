@@ -22,20 +22,21 @@ export default function CartSidebar() {
     };
   }, []);
 
-  useEffect(() => {
-    const handleOpenCheckout = (e: any) => {
-      setShowCheckout(true);
-      setIsOpen(false);
-    };
-    
-    window.addEventListener('openCheckout', handleOpenCheckout);
-    
-    return () => {
-      window.removeEventListener('openCheckout', handleOpenCheckout);
-    };
-  }, []);
-
   const handleCheckout = () => {
+    const total = getTotal();
+    console.log('🛒 Opening checkout with:', {
+      items: cartState.items,
+      total: total
+    });
+    
+    // Dispatch event with current cart data
+    window.dispatchEvent(new CustomEvent('openCheckout', { 
+      detail: { 
+        items: cartState.items,
+        total: total
+      }
+    }));
+    
     setShowCheckout(true);
     setIsOpen(false);
   };
@@ -179,7 +180,7 @@ export default function CartSidebar() {
         )}
       </div>
 
-      {showCheckout && (
+      {showCheckout && cartState.items.length > 0 && (
         <CheckoutModal
           isOpen={showCheckout}
           onClose={() => setShowCheckout(false)}
