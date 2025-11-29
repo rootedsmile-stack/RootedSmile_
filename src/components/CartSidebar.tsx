@@ -45,7 +45,6 @@ export default function CartSidebar() {
 
   return (
     <>
-      {/* Cart Overlay */}
       <div
         className={`fixed inset-0 bg-charcoal/60 backdrop-blur-sm z-[998] transition-opacity ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -53,13 +52,11 @@ export default function CartSidebar() {
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Cart Sidebar */}
       <div
         className={`fixed top-0 right-0 bottom-0 w-full max-w-md bg-soft-white shadow-2xl z-[999] transition-transform duration-300 flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Header */}
         <div className="px-6 py-5 border-b border-warm-beige bg-white flex justify-between items-center">
           <h2 className="font-serif text-2xl font-bold text-primary-teal">
             Your Cart ({itemCount})
@@ -74,7 +71,6 @@ export default function CartSidebar() {
           </button>
         </div>
 
-        {/* Items */}
         <div className="flex-1 overflow-y-auto p-6">
           {cartState.items.length === 0 ? (
             <div className="text-center py-12">
@@ -143,7 +139,6 @@ export default function CartSidebar() {
           )}
         </div>
 
-        {/* Footer */}
         {cartState.items.length > 0 && (
           <div className="border-t border-warm-beige bg-white p-6">
             <div className="space-y-2 mb-4">
@@ -184,7 +179,6 @@ export default function CartSidebar() {
         )}
       </div>
 
-      {/* Checkout Modal */}
       {showCheckout && (
         <CheckoutModal
           isOpen={showCheckout}
