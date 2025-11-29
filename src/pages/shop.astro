@@ -1,8 +1,12 @@
----
+------
 import Layout from '../layouts/Layout.astro';
 import SectionWrapper from '../components/SectionWrapper.astro';
 import FAQAccordion from '../components/FAQAccordion';
-import CheckoutModal from '../components/CheckoutModal';
+import CheckoutModalWrapper from '../components/CheckoutModalWrapper';
+
+<!-- Checkout Modal -->
+<CheckoutModalWrapper client:only="react" />
+
 
 const faqItems = [
   {
