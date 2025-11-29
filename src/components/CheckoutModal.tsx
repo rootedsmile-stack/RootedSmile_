@@ -88,6 +88,7 @@ export default function CheckoutModal({ isOpen, onClose, items, total }: Checkou
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
+    console.log('CheckoutModal mounted/updated', { isOpen, itemsLength: items.length });
     if (isOpen && items.length > 0) {
       createPaymentIntent();
     }
