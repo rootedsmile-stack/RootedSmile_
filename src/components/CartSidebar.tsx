@@ -1,13 +1,12 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useStore } from '@nanostores/react';
-import { CartContext, cartStore } from './cart/CartContext';
+import { cartStore, removeFromCart, updateCartQuantity, getCartTotal } from './cart/CartContext';
 import CheckoutModal from './CheckoutModal';
 
 export default function CartSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const cartState = useStore(cartStore);
-  const { removeItem, updateQuantity, getTotal } = useContext(CartContext);
 
   useEffect(() => {
     const handleOpen = () => setIsOpen(true);
@@ -23,26 +22,31 @@ export default function CartSidebar() {
   }, []);
 
   const handleCheckout = () => {
-    const total = getTotal();
+    const total = getCartTotal();
     console.log('🛒 Opening checkout with:', {
       items: cartState.items,
-      total: total
+      total: total,
+      itemDetails: cartState.items.map(item => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        subtotal: item.price * item.quantity
+      }))
     });
-    
-    // Dispatch event with current cart data
-    window.dispatchEvent(new CustomEvent('openCheckout', { 
-      detail: { 
-        items: cartState.items,
-        total: total
-      }
-    }));
     
     setShowCheckout(true);
     setIsOpen(false);
   };
 
-  const total = getTotal();
+  // Calculate total from current cart state
+  const total = cartState.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const itemCount = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
+
+  console.log('CartSidebar render:', { 
+    itemCount, 
+    total,
+    items: cartState.items 
+  });
 
   return (
     <>
@@ -103,15 +107,15 @@ export default function CartSidebar() {
                       {item.name}
                     </h3>
                     <p className="text-sm text-charcoal/60 mb-2">Size: {item.size}</p>
-                    <p className="font-semibold text-primary-teal">
-                      ${item.price.toFixed(2)}
+                    <p className="font-semibold text-primary-teal text-lg">
+                      ${item.price.toFixed(2)} × {item.quantity} = ${(item.price * item.quantity).toFixed(2)}
                     </p>
                     
                     <div className="flex items-center justify-between mt-3">
                       <div className="flex items-center gap-3 bg-warm-beige rounded-full px-3 py-1">
                         <button
-                          onClick={() => updateQuantity(item.id, item.size, Math.max(1, item.quantity - 1))}
-                          className="w-6 h-6 bg-white rounded-full text-primary-teal hover:bg-primary-teal hover:text-white transition text-sm"
+                          onClick={() => updateCartQuantity(item.id, item.size, Math.max(1, item.quantity - 1))}
+                          className="w-6 h-6 bg-white rounded-full text-primary-teal hover:bg-primary-teal hover:text-white transition text-sm font-bold"
                         >
                           −
                         </button>
@@ -119,15 +123,15 @@ export default function CartSidebar() {
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
-                          className="w-6 h-6 bg-white rounded-full text-primary-teal hover:bg-primary-teal hover:text-white transition text-sm"
+                          onClick={() => updateCartQuantity(item.id, item.size, item.quantity + 1)}
+                          className="w-6 h-6 bg-white rounded-full text-primary-teal hover:bg-primary-teal hover:text-white transition text-sm font-bold"
                         >
                           +
                         </button>
                       </div>
                       
                       <button
-                        onClick={() => removeItem(item.id, item.size)}
+                        onClick={() => removeFromCart(item.id, item.size)}
                         className="text-terracotta hover:text-terracotta/70 text-sm underline"
                       >
                         Remove
@@ -145,7 +149,7 @@ export default function CartSidebar() {
             <div className="space-y-2 mb-4">
               <div className="flex justify-between text-sm text-charcoal/70">
                 <span>Subtotal</span>
-                <span>${total.toFixed(2)}</span>
+                <span className="font-semibold">${total.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm text-charcoal/70 pb-3 border-b border-warm-beige">
                 <span>Shipping</span>
