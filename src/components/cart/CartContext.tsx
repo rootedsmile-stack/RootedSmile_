@@ -36,6 +36,8 @@ export const addToCart = (item: CartItem) => {
   } else {
     cartStore.set({ items: [...state.items, item] });
   }
+  
+  console.log('Cart updated:', cartStore.get());
 };
 
 export const removeFromCart = (id: string, size: string) => {
@@ -43,6 +45,7 @@ export const removeFromCart = (id: string, size: string) => {
   cartStore.set({
     items: state.items.filter((item) => !(item.id === id && item.size === size)),
   });
+  console.log('Cart after removal:', cartStore.get());
 };
 
 export const updateCartQuantity = (id: string, size: string, quantity: number) => {
@@ -51,6 +54,7 @@ export const updateCartQuantity = (id: string, size: string, quantity: number) =
     item.id === id && item.size === size ? { ...item, quantity } : item
   );
   cartStore.set({ items: newItems });
+  console.log('Cart after update:', cartStore.get());
 };
 
 export const clearCart = () => {
@@ -59,5 +63,9 @@ export const clearCart = () => {
 
 export const getCartTotal = () => {
   const state = cartStore.get();
-  return state.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  const total = state.items.reduce((sum, item) => {
+    return sum + (item.price * item.quantity);
+  }, 0);
+  console.log('Calculating total:', { items: state.items, total });
+  return total;
 };
