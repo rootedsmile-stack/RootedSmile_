@@ -1,26 +1,30 @@
----
-import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import { CartProvider } from '../components/cart/CartProvider';
-import CartSidebar from '../components/CartSidebar';
+-----
+
+import ‘../styles/global.css’;
+import Navbar from ‘../components/Navbar.astro’;
+import Footer from ‘../components/Footer.astro’;
+import { CartProvider } from ‘../components/cart/CartProvider’;
+import CartSidebar from ‘../components/CartSidebar’;
 
 interface Props {
-  title: string;
-  description?: string;
+title: string;
+description?: string;
 }
 
-const { title, description = "Clean heritage tooth powder for a brighter, calmer smile." } = Astro.props;
----
+## const { title, description = “Clean heritage tooth powder for a brighter, calmer smile.” } = Astro.props;
 
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} | Rooted Smile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>{title} | RootedSmile</title>
   </head>
   <body>
     <CartProvider client:load>
@@ -33,3 +37,153 @@ const { title, description = "Clean heritage tooth powder for a brighter, calmer
     </CartProvider>
   </body>
 </html>
+
+<style is:global>
+  :root {
+    --sage-green: #c3b996;
+    --cream: #e8e0d7;
+    --rose-gold: #b87861;
+    --teal: #124544;
+    --white: #ffffff;
+    --text-dark: #2c3e50;
+    --text-light: #666666;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.5;
+    color: var(--text-dark);
+    letter-spacing: 0.3px;
+    background: #fafafa;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  .promo-banner {
+    background: var(--teal);
+    color: var(--white);
+    text-align: center;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .navbar {
+    background: var(--white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--rose-gold);
+  }
+
+  main {
+    min-height: calc(100vh - 200px);
+  }
+
+  footer {
+    background: var(--teal);
+    color: var(--white);
+    padding: 2.5rem 5%;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    border: 1px solid var(--teal);
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: var(--rose-gold);
+    border-color: var(--rose-gold);
+  }
+
+  .btn-secondary {
+    background: var(--white);
+    color: var(--teal);
+    border: 1px solid var(--teal);
+  }
+
+  .btn-secondary:hover {
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      gap: 1rem;
+    }
+    
+    .nav-links a {
+      font-size: 0.75rem;
+    }
+  }
+</style>
