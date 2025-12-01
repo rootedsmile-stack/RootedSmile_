@@ -1,31 +1,41 @@
----
----
+-----
 
-<nav class="sticky top-0 z-50 bg-soft-white border-b border-warm-beige shadow-sm">
+## // components/Navbar.astro
+
+<!-- Promotional Banner -->
+
+<div class="bg-[#124544] text-white text-center py-3 text-sm font-medium tracking-widest uppercase">
+  Free Shipping on Orders Over $50
+</div>
+
+<nav class="sticky top-0 z-50 bg-white border-b border-[#e8e0d7] shadow-sm">
   <div class="container-custom">
     <div class="flex items-center justify-between h-16">
-      <a href="/" class="font-serif text-2xl font-semibold text-primary-teal tracking-tight">
-        Rooted Smile
+      <a href="/" class="font-serif text-2xl font-medium text-[#124544] tracking-wide">
+        RootedSmile
       </a>
-      
-      <div class="hidden md:flex items-center space-x-8">
-        <a href="/" class="text-sm font-medium text-charcoal hover:text-primary-teal transition">Home</a>
-        <a href="/shop" class="text-sm font-medium text-charcoal hover:text-primary-teal transition">Shop</a>
-        <a href="/our-story" class="text-sm font-medium text-charcoal hover:text-primary-teal transition">Our Story</a>
-        <a href="/contact" class="text-sm font-medium text-charcoal hover:text-primary-teal transition">Contact</a>
-      </div>
-      
-      <div class="flex items-center">
-        <button id="cart-button" class="relative p-2 text-primary-teal hover:text-terracotta transition">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span id="cart-count" class="absolute -top-1 -right-1 bg-terracotta text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-            0
-          </span>
-        </button>
-      </div>
-    </div>
+
+```
+  <div class="hidden md:flex items-center space-x-8">
+    <a href="/" class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase" style="font-size: 0.8rem; letter-spacing: 1.5px;">Home</a>
+    <a href="/shop" class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase" style="font-size: 0.8rem; letter-spacing: 1.5px;">Shop</a>
+    <a href="/our-story" class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase" style="font-size: 0.8rem; letter-spacing: 1.5px;">Our Story</a>
+    <a href="/contact" class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase" style="font-size: 0.8rem; letter-spacing: 1.5px;">Contact</a>
+  </div>
+  
+  <div class="flex items-center">
+    <button id="cart-button" class="relative p-2 text-[#124544] hover:text-[#b87861] transition">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+      <span id="cart-count" class="absolute -top-1 -right-1 bg-[#b87861] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+        0
+      </span>
+    </button>
+  </div>
+</div>
+```
+
   </div>
 </nav>
 
