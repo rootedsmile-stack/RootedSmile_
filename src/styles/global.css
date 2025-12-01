@@ -102,3 +102,18 @@ border: 1px solid var(–teal);
 background: var(–teal);
 color: var(–white);
 }
+
+.container-custom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+/* Optional: tweak for smaller screens */
+@media (max-width: 768px) {
+  .container-custom {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+}
