@@ -2,15 +2,18 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import CartShell from "../components/cart/CartShell"; // React wrapper: CartProvider + CartSidebar
+import { CartProvider } from "../components/cart/CartProvider";
+import CartSidebar from "../components/CartSidebar";
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "Clean heritage tooth powder for a brighter, calmer smile." } =
-  Astro.props;
+const {
+  title,
+  description = "Clean heritage tooth powder for a brighter, calmer smile.",
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -36,10 +39,12 @@ const { title, description = "Clean heritage tooth powder for a brighter, calmer
     <Footer />
 
     {/*
-      React cart island: wraps CartSidebar in CartProvider.
-      Renders only on the client.
+      React cart island: CartProvider (React) wraps CartSidebar (React).
+      Navbar/Footer stay Astro-only.
     */}
-    <CartShell client:only="react" />
+    <CartProvider client:only="react">
+      <CartSidebar />
+    </CartProvider>
   </body>
 </html>
 
