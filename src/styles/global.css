@@ -61,7 +61,7 @@ padding: 0 5%;
 
 /* Sections should have proper spacing */
 section {
-padding: 5rem 0;
+padding: 2.5rem 0;
 }
 
 @media (max-width: 768px) {
