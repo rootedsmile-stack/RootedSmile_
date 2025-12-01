@@ -1,5 +1,4 @@
 ---
-import { cartStore } from "./cart/CartContext";
 ---
 
 <!-- Promotional Banner -->
@@ -9,36 +8,39 @@ import { cartStore } from "./cart/CartContext";
 
 <nav class="sticky top-0 z-50 bg-white border-b border-[#e8e0d7] shadow-sm">
   <div class="container-custom">
-    <div class="flex items-center justify-between h-16">
-      <a href="/" class="font-serif text-2xl font-medium text-[#124544] tracking-wide">
+    <div class="flex items-center justify-between h-20">
+      <a
+        href="/"
+        class="font-serif text-2xl font-medium text-[#124544] tracking-wide"
+      >
         RootedSmile
       </a>
 
-      <div class="hidden md:flex items-center space-x-8">
+      <div class="hidden md:flex items-center space-x-10">
         <a
           href="/"
-          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase"
+          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase py-2"
           style="font-size: 0.8rem; letter-spacing: 1.5px;"
         >
           Home
         </a>
         <a
           href="/shop"
-          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase"
+          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase py-2"
           style="font-size: 0.8rem; letter-spacing: 1.5px;"
         >
           Shop
         </a>
         <a
           href="/our-story"
-          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase"
+          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase py-2"
           style="font-size: 0.8rem; letter-spacing: 1.5px;"
         >
           Our Story
         </a>
         <a
           href="/contact"
-          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase"
+          class="text-sm font-normal text-[#124544] hover:text-[#b87861] transition tracking-widest uppercase py-2"
           style="font-size: 0.8rem; letter-spacing: 1.5px;"
         >
           Contact
@@ -49,7 +51,6 @@ import { cartStore } from "./cart/CartContext";
         <button
           id="cart-button"
           class="relative p-2 text-[#124544] hover:text-[#b87861] transition"
-          type="button"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -71,18 +72,25 @@ import { cartStore } from "./cart/CartContext";
   </div>
 </nav>
 
-<script>
-  const cartButton = document.getElementById("cart-button");
-  const cartCountEl = document.getElementById("cart-count");
+<script type="module" hoist>
+  import { cartStore } from "./cart/CartContext";
 
-  if (cartCountEl) {
-    cartStore.subscribe((state) => {
-      const count = state.items.reduce((sum, item) => sum + item.quantity, 0);
-      cartCountEl.textContent = count.toString();
+  window.addEventListener("astro:load", () => {
+    const cartButton = document.getElementById("cart-button");
+    const cartCountEl = document.getElementById("cart-count");
+
+    if (cartCountEl) {
+      cartStore.subscribe((state) => {
+        const count = state.items.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        );
+        cartCountEl.textContent = count.toString();
+      });
+    }
+
+    cartButton?.addEventListener("click", () => {
+      window.dispatchEvent(new Event("openCart"));
     });
-  }
-
-  cartButton?.addEventListener("click", () => {
-    window.dispatchEvent(new Event("openCart"));
   });
 </script>
