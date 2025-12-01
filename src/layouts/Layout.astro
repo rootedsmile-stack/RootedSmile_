@@ -1,40 +1,45 @@
------
-
-import ‘../styles/global.css’;
-import Navbar from ‘../components/Navbar.astro’;
-import Footer from ‘../components/Footer.astro’;
-import { CartProvider } from ‘../components/cart/CartProvider’;
-import CartSidebar from ‘../components/CartSidebar’;
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import CartShell from "../components/cart/CartShell"; // React wrapper: CartProvider + CartSidebar
 
 interface Props {
-title: string;
-description?: string;
+  title: string;
+  description?: string;
 }
 
-## const { title, description = “Clean heritage tooth powder for a brighter, calmer smile.” } = Astro.props;
+const { title, description = "Clean heritage tooth powder for a brighter, calmer smile." } =
+  Astro.props;
+---
 
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <title>{title} | RootedSmile</title>
   </head>
   <body>
-    <CartProvider client:load>
-      <Navbar />
-      <main class="min-h-screen">
-        <slot />
-      </main>
-      <Footer />
-      <CartSidebar client:only="react" />
-    </CartProvider>
+    <Navbar />
+    <main class="min-h-screen">
+      <slot />
+    </main>
+    <Footer />
+
+    {/*
+      React cart island: wraps CartSidebar in CartProvider.
+      Renders only on the client.
+    */}
+    <CartShell client:only="react" />
   </body>
 </html>
 
@@ -56,15 +61,20 @@ description?: string;
   }
 
   body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     line-height: 1.5;
     color: var(--text-dark);
     letter-spacing: 0.3px;
     background: #fafafa;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Cormorant Garamond", serif;
     font-weight: 400;
   }
 
@@ -86,7 +96,7 @@ description?: string;
 
   .navbar {
     background: var(--white);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -100,7 +110,7 @@ description?: string;
   }
 
   .logo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: "Cormorant Garamond", serif;
     font-size: 1.8rem;
     font-weight: 500;
     letter-spacing: 2px;
@@ -181,7 +191,7 @@ description?: string;
     .nav-links {
       gap: 1rem;
     }
-    
+
     .nav-links a {
       font-size: 0.75rem;
     }
