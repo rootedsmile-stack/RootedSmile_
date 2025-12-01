@@ -2,26 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
-
-@layer base {
-  body {
-    @apply bg-soft-white text-charcoal;
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', serif;
-    @apply text-primary-teal;
-  }
+:root {
+–sage-green: #c3b996;
+–cream: #e8e0d7;
+–rose-gold: #b87861;
+–teal: #124544;
+–white: #ffffff;
+–text-dark: #2c3e50;
+–text-light: #666666;
 }
 
-@layer components {
-  .section-padding {
-    @apply py-16 md:py-24;
+- {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   }
-  
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
+
+body {
+font-family: ‘Montserrat’, sans-serif;
+line-height: 1.5;
+color: var(–text-dark);
+letter-spacing: 0.3px;
+background: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 400;
+}
+
+.container {
+max-width: 1400px;
+margin: 0 auto;
+padding: 0 5%;
+}
+
+/* Buttons */
+.btn {
+display: inline-block;
+background: var(–teal);
+color: var(–white);
+padding: 1rem 2.5rem;
+text-decoration: none;
+font-size: 0.85rem;
+font-weight: 400;
+letter-spacing: 2px;
+text-transform: uppercase;
+transition: all 0.3s;
+border: 1px solid var(–teal);
+cursor: pointer;
+}
+
+.btn:hover {
+background: var(–rose-gold);
+border-color: var(–rose-gold);
+}
+
+.btn-secondary {
+background: var(–white);
+color: var(–teal);
+border: 1px solid var(–teal);
+}
+
+.btn-secondary:hover {
+background: var(–teal);
+color: var(–white);
 }
