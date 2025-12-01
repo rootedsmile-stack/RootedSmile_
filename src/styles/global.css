@@ -106,8 +106,8 @@ color: var(–white);
 .container-custom {
   max-width: 1400px;
   margin: 0 auto;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 /* Optional: tweak for smaller screens */
